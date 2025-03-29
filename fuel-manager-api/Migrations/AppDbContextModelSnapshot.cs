@@ -22,7 +22,7 @@ namespace fuel_manager_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("fuel_manager_api.Models.Consum", b =>
+            modelBuilder.Entity("fuel_manager_api.Models.Consumption", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,7 +33,7 @@ namespace fuel_manager_api.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Desc")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -43,17 +43,14 @@ namespace fuel_manager_api.Migrations
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("VehicleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VeiculoId")
+                    b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Consum");
+                    b.ToTable("Consumption ");
                 });
 
             modelBuilder.Entity("fuel_manager_api.Models.Vehicle", b =>
@@ -87,18 +84,20 @@ namespace fuel_manager_api.Migrations
                     b.ToTable("Vehicle");
                 });
 
-            modelBuilder.Entity("fuel_manager_api.Models.Consum", b =>
+            modelBuilder.Entity("fuel_manager_api.Models.Consumption", b =>
                 {
                     b.HasOne("fuel_manager_api.Models.Vehicle", "Vehicle")
-                        .WithMany("Consums")
-                        .HasForeignKey("VehicleId");
+                        .WithMany("Consumptions")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("fuel_manager_api.Models.Vehicle", b =>
                 {
-                    b.Navigation("Consums");
+                    b.Navigation("Consumptions");
                 });
 #pragma warning restore 612, 618
         }

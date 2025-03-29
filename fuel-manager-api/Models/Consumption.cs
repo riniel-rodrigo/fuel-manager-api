@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace fuel_manager_api.Models
 {
-    [Table("Consum")]
-    public class Consum
+    [Table("Consumption ")]
+    public class Consumption
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string Desc { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
@@ -23,8 +23,9 @@ namespace fuel_manager_api.Models
         public FuelType Type { get; set; }
 
         [Required]
-        public int VeiculoId { get; set; }
+        public int VehicleId { get; set; }
 
+        [ForeignKey("VehicleId")]
         public Vehicle Vehicle { get; set; }
 
     }

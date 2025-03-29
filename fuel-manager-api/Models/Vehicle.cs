@@ -24,6 +24,6 @@ namespace fuel_manager_api.Models
         [Required]
         public int YearModel { get; set; }
 
-        public ICollection<Consum> Consums { get; set; }
+        public ICollection<Consumption> Consumptions { get; set; }
     }
 }

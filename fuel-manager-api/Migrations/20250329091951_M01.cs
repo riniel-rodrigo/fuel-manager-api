@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace fuel_manager_api.Migrations
 {
     /// <inheritdoc />
-    public partial class M00 : Migration
+    public partial class M01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,31 +29,31 @@ namespace fuel_manager_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Consum",
+                name: "Consumption ",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
-                    VeiculoId = table.Column<int>(type: "int", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: true)
+                    VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Consum", x => x.Id);
+                    table.PrimaryKey("PK_Consumption ", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Consum_Vehicle_VehicleId",
+                        name: "FK_Consumption _Vehicle_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicle",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Consum_VehicleId",
-                table: "Consum",
+                name: "IX_Consumption _VehicleId",
+                table: "Consumption ",
                 column: "VehicleId");
         }
 
@@ -61,7 +61,7 @@ namespace fuel_manager_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Consum");
+                name: "Consumption ");
 
             migrationBuilder.DropTable(
                 name: "Vehicle");

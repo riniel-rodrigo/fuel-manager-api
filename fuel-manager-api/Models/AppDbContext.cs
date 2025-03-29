@@ -12,7 +12,7 @@ namespace fuel_manager_api.Models
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<Consum> Consums { get; set; }
+        public DbSet<Consumption> Consumptions { get; set; }
 
     }
 }
