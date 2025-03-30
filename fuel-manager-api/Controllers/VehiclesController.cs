@@ -45,6 +45,7 @@ namespace fuel_manager_api.Controllers
 
             if (model == null) return NotFound();
 
+            AddLinks(model);
             return Ok(model);
         }
 
@@ -74,6 +75,13 @@ namespace fuel_manager_api.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private void AddLinks(Vehicle model)
+        {
+            model.Links.Add(new LinkDto(model.Id, Url.ActionLink(), rel: "self", method: "GET" ));
+            model.Links.Add(new LinkDto(model.Id, Url.ActionLink(), rel: "update", method: "PUT"));
+            model.Links.Add(new LinkDto(model.Id, Url.ActionLink(), rel: "delete", method: "Delete"));
         }
     }
 }
